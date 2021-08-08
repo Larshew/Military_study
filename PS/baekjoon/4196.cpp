@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <stack>
 #include <memory.h>
 #define MAX_NM 100000
@@ -46,6 +47,10 @@ int main()
 			list_rev[b].push_back(a);
 		}
 		
+		for (i=1;i<=n;i++){
+			sort(list[i].begin(), list[i].end());
+			sort(list_rev[i].begin(), list_rev[i].end());
+		}
 		memset(visit,0,sizeof(visit));
 		for (i=1;i<=n;i++) mom[i]=i;
 		for (i=1;i<=n;i++){
