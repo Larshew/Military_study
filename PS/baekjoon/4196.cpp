@@ -31,6 +31,7 @@ void dfs_back(int node){
 	same_mom.push_back(node);
 }
 
+bool hasMom[MAX_NM+1];
 int main()
 {
 	int testcase;
@@ -39,6 +40,8 @@ int main()
 		int i;
 
 		cin >> n >> m;
+
+		for (i=1;i<=n;i++) hasMom[i]=false;
 		for (i=1;i<=m;i++){
 			int a,b;
 
@@ -70,18 +73,19 @@ int main()
 			searched_node.pop();
 		}
 		
+		cout << endl;
 		int result=0;
 		for (i=1;i<=n;i++){
-			bool hasMom=false;
-			if (mom[i] == i){
-				for (int _n:list_rev[i]){
-					if (mom[_n] != i){
-						hasMom=true;
-						break;
-					}
+			for (int _n:list_rev[i]){
+				if (mom[_n] != mom[i]){
+					hasMom[mom[i]]=true;
+					break;
 				}
-				if (!hasMom) result++;
 			}
+		}
+
+		for (i=1;i<=n;i++){
+			if (mom[i]==i && !hasMom[i]) result++;
 		}
 		cout << result << endl;
 		
